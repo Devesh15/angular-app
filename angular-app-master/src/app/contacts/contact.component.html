@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Contact Management</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+	<body>
+		<div>
+			<div class="col-sm-6">
+				<div class="well left">
+					<input class="form-control" id="Search" (click)="myFunction()" type="text" placeholder="Search" aria-label="Search">
+					<ul id="Menu" class="list-group smooth-scroll">
+						<li class="list-group-item" *ngFor = "let contact of contacts">
+							<img src= "https://ui-avatars.com/api/?rounded=true&name={{contact.display_name}}&size=30">
+							<a class="user-icon" (click) ='setSelectedContact(contact)'>{{contact.display_name}}</a>
+					</ul>
+					
+				</div>
+			</div>
+			<div class="col-sm-6 right">
+				<div class="well">
+					 <!-- Edit Button -->
+					<button class="btn btn-default pull-right" (click)="edit = true">
+					<span class="glyphicon glyphicon-pencil"></span><span> - Edit</span>
+					</button>
+					
+					<!-- <h3 class="text-center">{{selectedContact.display_name}}</h3> -->
+					<form name="userForm" novalidate (submit)="submit(contacts)">
+		
+						<p><b>First Name:</b><span *ngIf="!edit">{{selectedContact.first_name}}</span>
+						<input *ngIf="edit == true" [(ngModel)]="selectedContact.first_name" name="first_name">
+						
+						<p><b>Last Name:</b><span *ngIf="!edit">{{selectedContact.last_name}}</span>
+						<input *ngIf="edit" [(ngModel)]="selectedContact.last_name" name="last_name">
+						
+						<p><b>Email:</b><span *ngIf="!edit">{{selectedContact.e_mail_address}} </span>
+						<input *ngIf="edit" [(ngModel)]="selectedContact.e_mail_address" name="e_mail_address">
+						
+						<p><b>Email_2:</b><span *ngIf="!edit">{{selectedContact.email2_address}} </span>
+						<input *ngIf="edit" [(ngModel)]="selectedContact.email2_address" name="email2_address">
+						
+						<p><b>Email_3:</b><span *ngIf="!edit">{{selectedContact.email3_address}} </span>
+						<input *ngIf="edit" [(ngModel)]="selectedContact.email3_address" name="email3_address">
+						
+						<p><b>Phone:</b><span *ngIf="!edit">{{selectedContact.home_phone}} </span>
+						<input *ngIf="edit" [(ngModel)]="selectedContact.home_phone" name="home_phone">
+						
+						<!-- Submit Button  -->
+						 <div class="text-center card-footer">
+							<button class="btn btn-default" type="submit" (click)="submitted = true">
+							<span class="glyphicon glyphicon-send"></span><span> - Submit</span>
+							</button>
+						 </div>
+					</form>
+					
+				</div>
+			</div>
+		</div>	
+		
+	</body>
+</html>
